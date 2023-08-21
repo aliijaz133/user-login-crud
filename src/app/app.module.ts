@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -15,7 +15,12 @@ import { FormVisibilityDirective } from './list-comp/form-visibility.directive';
 registerLocaleData(en);
 
 @NgModule({
-  declarations: [AppComponent, ListCompComponent, UserLoginComponent, FormVisibilityDirective],
+  declarations: [
+    AppComponent,
+    ListCompComponent,
+    UserLoginComponent,
+    FormVisibilityDirective,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -23,6 +28,7 @@ registerLocaleData(en);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatFormFieldModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

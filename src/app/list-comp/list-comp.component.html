@@ -59,6 +59,8 @@
         class="product-input"
         placeholder="Enter Id"
         autocomplete="off"
+        min="1"
+        required
       />
       <input
         type="text"
@@ -67,6 +69,7 @@
         class="product-input"
         placeholder="Product Name"
         autocomplete="off"
+        required
       />
       <input
         type="number"
@@ -75,6 +78,8 @@
         class="product-input"
         placeholder="Price"
         autocomplete="off"
+        min="1000"
+        required
       />
       <button class="add-item__btn" (click)="createNewItem()" type="submit">
         Add Item
