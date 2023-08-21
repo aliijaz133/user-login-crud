@@ -1,0 +1,84 @@
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
+<div class="btn-container">
+  <button (click)="userLogout()" class="logout-btn">
+    Logout&nbsp;<i class="fa fa-sign-out"></i>
+  </button>
+  <button class="logout-btn add-item" (click)="formVisible()">Add Item</button>
+</div>
+
+<div class="list-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th colspan="2">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let andriod of products; let i = index" class="tr-function">
+        <td>{{ andriod.id }}</td>
+        <td>{{ andriod.name }}</td>
+        <td>{{ andriod.rate }}</td>
+        <td>
+          <i
+            class="fa fa-edit"
+            style="color: #0000ff; font-size: 1.3rem; cursor: pointer"
+            (click)="updateProductData()"
+          ></i>
+        </td>
+        <td>
+          <i
+            class="fa fa-trash-o"
+            style="color: red; font-size: 1.3rem; cursor: pointer"
+            (click)="deleteProductData(i)"
+          ></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="form-visibilty__control">
+  <div class="form-setting">
+    <form method="post" class="form-container" (submit)="setProductData()">
+      <img
+        src="/assets/image/red-cross-btn.webp"
+        alt="Cross Button"
+        class="red-cross-btn"
+        (click)="minimizeForm()"
+      />
+      <input
+        type="number"
+        name="productId"
+        id=""
+        class="product-input"
+        placeholder="Enter Id"
+        autocomplete="off"
+      />
+      <input
+        type="text"
+        name="productName"
+        id=""
+        class="product-input"
+        placeholder="Product Name"
+        autocomplete="off"
+      />
+      <input
+        type="number"
+        name="productPrice"
+        id=""
+        class="product-input"
+        placeholder="Price"
+        autocomplete="off"
+      />
+      <button class="add-item__btn" (click)="createNewItem()" type="submit">
+        Add Item
+      </button>
+    </form>
+  </div>
+</div>

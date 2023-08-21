@@ -1,0 +1,59 @@
+<div class="forms">
+  <div>
+    <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
+      <div>
+        <label for="userEmail">Email:</label><br />
+        <input
+          type="email"
+          id="userEmail"
+          formControlName="userEmail"
+          [(ngModel)]="userData.userEmail"
+          placeholder="Enter Email"
+          autocomplete="off"
+        />
+        <div
+          *ngIf="
+            loginForm.get('userEmail')?.invalid &&
+            loginForm.get('userEmail')?.touched
+          "
+        >
+          <div *ngIf="loginForm.get('userEmail')?.hasError('required')">
+            <code>Email is <span style="color: #ff0000">required</span></code>
+          </div>
+          <div *ngIf="loginForm.get('userEmail')?.hasError('email')">
+            <code>Invalid email format</code>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <label for="userPwd">Password:</label><br />
+        <input
+          type="password"
+          id="userPwd"
+          formControlName="userPwd"
+          [(ngModel)]="userData.userPassword"
+          placeholder="Enter Password"
+          autocomplete="off"
+        />
+        <div
+          *ngIf="
+            loginForm.get('userPwd')?.invalid &&
+            loginForm.get('userPwd')?.touched
+          "
+        >
+          <div *ngIf="loginForm.get('userPwd')?.hasError('required')">
+            <code
+              >Password is <span style="color: #ff0000">required</span></code
+            >
+          </div>
+          <div *ngIf="loginForm.get('userPwd')?.hasError('minlength')">
+            <code>Password should be at least 6 characters long</code>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="loginForm.invalid">Login</button>
+    </form>
+  </div>
+</div>
