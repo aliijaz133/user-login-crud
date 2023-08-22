@@ -82,7 +82,7 @@ export class ListCompComponent implements OnInit {
   }
 
   updateProductData(index: number) {
-    this.productDataDetail.id;
+    this.productDataDetail.id = index;
     this.productDataDetail.name = this.products[index].name;
     this.productDataDetail.rate = this.products[index].rate;
     this.productDataDetail.editing = true;
@@ -94,7 +94,7 @@ export class ListCompComponent implements OnInit {
 
   confirmUpdate(index: number) {
     const updatedProduct: Product = {
-      id: this.productDataDetail.id,
+      id: index,
       name: this.productDataDetail.name,
       rate: this.productDataDetail.rate,
       editing: this.productDataDetail.editing,

@@ -14,7 +14,6 @@
   <table>
     <thead>
       <tr>
-        <th>Id</th>
         <th>Name</th>
         <th>Price</th>
         <th colspan="2">Action</th>
@@ -22,7 +21,6 @@
     </thead>
     <tbody>
       <tr *ngFor="let product of products; let i = index" class="tr-function">
-        <td>{{ product.id }}</td>
         <td>{{ product.name }}</td>
         <td>{{ product.rate }}</td>
         <td>
