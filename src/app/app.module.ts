@@ -11,6 +11,7 @@ import en from '@angular/common/locales/en';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormVisibilityDirective } from './list-comp/form-visibility.directive';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 registerLocaleData(en);
 
@@ -20,6 +21,7 @@ registerLocaleData(en);
     ListCompComponent,
     UserLoginComponent,
     FormVisibilityDirective,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

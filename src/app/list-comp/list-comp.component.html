@@ -2,6 +2,7 @@
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 />
+
 <div class="btn-container">
   <button (click)="userLogout()" class="logout-btn">
     Logout&nbsp;<i class="fa fa-sign-out"></i>
@@ -20,15 +21,15 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let andriod of products; let i = index" class="tr-function">
-        <td>{{ andriod.id }}</td>
-        <td>{{ andriod.name }}</td>
-        <td>{{ andriod.rate }}</td>
+      <tr *ngFor="let product of products; let i = index" class="tr-function">
+        <td>{{ product.id }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.rate }}</td>
         <td>
           <i
             class="fa fa-edit"
             style="color: #0000ff; font-size: 1.3rem; cursor: pointer"
-            (click)="updateProductData()"
+            (click)="updateProductData(i)"
           ></i>
         </td>
         <td>
@@ -43,9 +44,16 @@
   </table>
 </div>
 
+<!-- Create New Product -->
+
 <div class="form-visibilty__control">
   <div class="form-setting">
-    <form method="post" class="form-container" (submit)="setProductData()">
+    <form
+      method="post"
+      class="form-container"
+      [formGroup]="productData"
+      (ngSubmit)="setProductData()"
+    >
       <img
         src="/assets/image/red-cross-btn.webp"
         alt="Cross Button"
@@ -55,8 +63,9 @@
       <input
         type="number"
         name="productId"
-        id=""
         class="product-input"
+        [(ngModel)]="productDataDetail.id"
+        formControlName="productId"
         placeholder="Enter Id"
         autocomplete="off"
         min="1"
@@ -65,8 +74,9 @@
       <input
         type="text"
         name="productName"
-        id=""
         class="product-input"
+        [(ngModel)]="productDataDetail.name"
+        formControlName="productName"
         placeholder="Product Name"
         autocomplete="off"
         required
@@ -74,16 +84,38 @@
       <input
         type="number"
         name="productPrice"
-        id=""
         class="product-input"
+        [(ngModel)]="productDataDetail.rate"
+        formControlName="productPrice"
         placeholder="Price"
         autocomplete="off"
         min="1000"
         required
       />
-      <button class="add-item__btn" (click)="createNewItem()" type="submit">
-        Add Item
-      </button>
+      <button class="add-item__btn" type="submit">Add Item</button>
     </form>
+  </div>
+</div>
+<div class="update-form" #formElement>
+  <div class="update-form__container">
+    <div *ngFor="let product of products; let i = index">
+      <div
+        *ngIf="productDataDetail.id === i && productDataDetail.editing"
+        class="update-form__setting"
+      >
+        <input
+          [(ngModel)]="productDataDetail.name"
+          placeholder="Product Name"
+        />
+        <input
+          [(ngModel)]="productDataDetail.rate"
+          placeholder="Product Rate"
+        />
+        <div class="update-cancel__btn">
+          <button (click)="confirmUpdate(i)">Update</button>
+          <button (click)="cancelUpdate()">Cancel</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

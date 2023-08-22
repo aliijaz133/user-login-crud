@@ -102,6 +102,32 @@ td {
   cursor: pointer;
 }
 
+.update-form {
+  display: flex;
+  justify-content: center;
+  background-color: #000000e3;
+  position: absolute;
+  top: 50%;
+  bottom: 50%;
+  right: 50%;
+  left: 50%;
+  visibility: hidden;
+}
+
+.update-form__container {
+  background-color: #000;
+}
+
+.update-form__setting {
+  background-color: #1c5374;
+}
+
+.update-cancel__btn {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
 @media (max-width: 420px) {
   table {
     max-width: fit-content;

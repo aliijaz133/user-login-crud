@@ -1,9 +1,8 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductServiceService } from './product-service.service';
 import { Product } from './product';
-import { FormGroup } from '@angular/forms';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-list-comp',
   templateUrl: './list-comp.component.html',
@@ -11,13 +10,29 @@ import { FormGroup } from '@angular/forms';
 })
 export class ListCompComponent implements OnInit {
   products: Product[] = [];
-  setProduct!: FormGroup;
+  productData: FormGroup;
+
+  @ViewChild('formElement') formElement: ElementRef | undefined;
+
+  productDataDetail = {
+    id: 0,
+    name: '',
+    rate: 0,
+    editing: true,
+  };
 
   constructor(
     private router: Router,
     private getData: ProductServiceService,
-    private el: ElementRef
-  ) {}
+    private el: ElementRef,
+    private fb: FormBuilder
+  ) {
+    this.productData = this.fb.group({
+      productId: ['', Validators.required],
+      productName: ['', Validators.required],
+      productPrice: ['', [Validators.required, Validators.min(1000)]],
+    });
+  }
 
   userLogout() {
     this.router.navigate(['/user-login']);
@@ -31,70 +46,83 @@ export class ListCompComponent implements OnInit {
     const formElements = this.el.nativeElement.getElementsByClassName(
       'form-visibilty__control'
     );
-
     for (let i = 0; i < formElements.length; i++) {
       formElements[i].style.visibility = 'visible';
     }
+    this.productData.reset();
   }
 
   minimizeForm() {
     const formElements = this.el.nativeElement.getElementsByClassName(
       'form-visibilty__control'
     );
-    if (formElements.length > 0) {
-      for (let i = 0; i < formElements.length; i++) {
-        formElements[i].style.visibility = 'hidden';
-      }
+    for (let i = 0; i < formElements.length; i++) {
+      formElements[i].style.visibility = 'hidden';
     }
   }
 
   createNewItem() {
     console.log('New item is created successfully.');
-    const formElements = this.el.nativeElement.getElementsByClassName(
-      'form-visibilty__control'
-    );
-    if (formElements.length > 0) {
-      for (let i = 0; i < formElements.length; i++) {
-        formElements[i].style.visibility = 'hidden';
-      }
-    }
+    this.minimizeForm();
   }
 
   setProductData() {
-    const productIdElement = document.getElementsByName(
-      'productId'
-    )[0] as HTMLInputElement;
+    if (this.productData.valid) {
+      const newProduct: Product = {
+        id: this.productDataDetail.id,
+        name: this.productDataDetail.name,
+        rate: this.productDataDetail.rate,
+        editing: this.productDataDetail.editing,
+      };
 
-    const productNameElement = document.getElementsByName(
-      'productName'
-    )[0] as HTMLInputElement;
-
-    const productRateElement = document.getElementsByName(
-      'productPrice'
-    )[0] as HTMLInputElement;
-
-    const productId = productIdElement.valueAsNumber;
-    const productName = productNameElement.value;
-    const productRate = productRateElement.valueAsNumber;
-
-    const newProduct: Product = {
-      id: productId,
-      name: productName,
-      rate: productRate,
-    };
-
-    this.products.push(newProduct);
-    console.log(this.products);
+      this.products.push(newProduct);
+      console.log('Product added:', newProduct);
+      this.createNewItem();
+    }
   }
 
-  updateProductData() {}
+  updateProductData(index: number) {
+    this.productDataDetail.id;
+    this.productDataDetail.name = this.products[index].name;
+    this.productDataDetail.rate = this.products[index].rate;
+    this.productDataDetail.editing = true;
+
+    if (this.formElement) {
+      this.formElement.nativeElement.style.visibility = 'visible';
+    }
+  }
+
+  confirmUpdate(index: number) {
+    const updatedProduct: Product = {
+      id: this.productDataDetail.id,
+      name: this.productDataDetail.name,
+      rate: this.productDataDetail.rate,
+      editing: this.productDataDetail.editing,
+    };
+
+    this.products[index] = updatedProduct;
+    console.log('Product updated:', updatedProduct);
+
+    this.productDataDetail = {
+      id: 0,
+      name: '',
+      rate: 0,
+      editing: false,
+    };
+  }
+
+  cancelUpdate() {
+    this.productDataDetail = {
+      id: 0,
+      name: '',
+      rate: 0,
+      editing: false,
+    };
+  }
 
   deleteProductData(index: number) {
-    // delete this.products[index];
-
     if (index >= 0 && index < this.products.length) {
       this.products.splice(index, 1);
-
       console.log('Product deleted:', this.products);
     } else {
       console.log('Invalid index provided.');

@@ -1,0 +1,28 @@
+* {
+  user-select: none;
+}
+
+.not-found {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 20%;
+  bottom: 50%;
+  left: 50%;
+  right: 50%;
+}
+
+h1 {
+  font-size: 10rem;
+  text-align: center;
+}
+
+.fa-zero {
+  color: #fff;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+
+h2 {
+  font-size: 2rem;
+  text-align: center;
+}
