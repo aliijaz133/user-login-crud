@@ -97,33 +97,3 @@
     </form>
   </div>
 </div>
-<div class="update-form" #formElement>
-  <div *ngFor="let product of products; let i = index">
-    <div
-      *ngIf="productDataDetail.id === i && productDataDetail.updating"
-      class="update-form__setting"
-    >
-      <img
-        src="/assets/image/red-cross-btn.webp"
-        alt="Cross Button"
-        class="red-cross-btn"
-        (click)="cancelUpdate()"
-      />
-      <input
-        [(ngModel)]="productDataDetail.name"
-        placeholder="Product Name"
-        class="product-input"
-      />
-      <input
-        [(ngModel)]="productDataDetail.price"
-        placeholder="Product Rate"
-        class="product-input"
-      />
-      <div class="update-cancel__btn">
-        <button (click)="confirmUpdate(i)" class="add-item__btn">Update</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<hr />
