@@ -13,6 +13,7 @@ export class ListCompComponent implements OnInit {
   productData: FormGroup;
 
   @ViewChild('formElement') formElement: ElementRef | undefined;
+  @ViewChild('addItem') addItem: ElementRef | undefined;
 
   productDataDetail = {
     id: 0,
@@ -43,21 +44,15 @@ export class ListCompComponent implements OnInit {
   }
 
   formVisible() {
-    const formElements = this.el.nativeElement.getElementsByClassName(
-      'form-visibilty__control'
-    );
-    for (let i = 0; i < formElements.length; i++) {
-      formElements[i].style.visibility = 'visible';
+    if (this.addItem) {
+      this.addItem.nativeElement.style.visibility = 'visible';
     }
     this.productData.reset();
   }
 
   minimizeForm() {
-    const formElements = this.el.nativeElement.getElementsByClassName(
-      'form-visibilty__control'
-    );
-    for (let i = 0; i < formElements.length; i++) {
-      formElements[i].style.visibility = 'hidden';
+    if (this.addItem) {
+      this.addItem.nativeElement.style.visibility = 'hidden';
     }
   }
 
