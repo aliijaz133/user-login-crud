@@ -24,6 +24,7 @@
           <i
             class="fa fa-edit"
             style="color: #0000ff; font-size: 1.3rem; cursor: pointer"
+            (click)="formVisible(product)"
           ></i>
         </td>
         <td>
@@ -90,14 +91,16 @@
           <code style="color: #ff0000">1000</code></span
         >
       </div>
-      <button class="add-item__btn" type="submit">Add Item</button>
+      <button class="add-item__btn" type="submit">
+        {{ productDataDetail.updating ? "Updating Item" : "Add Item" }}
+      </button>
     </form>
   </div>
 </div>
-<!-- <div class="update-form" #formElement>
+<div class="update-form" #formElement>
   <div *ngFor="let product of products; let i = index">
     <div
-      *ngIf="productDataDetail.id === i && productDataDetail.editing"
+      *ngIf="productDataDetail.id === i && productDataDetail.updating"
       class="update-form__setting"
     >
       <img
@@ -112,7 +115,7 @@
         class="product-input"
       />
       <input
-        [(ngModel)]="productDataDetail.rate"
+        [(ngModel)]="productDataDetail.price"
         placeholder="Product Rate"
         class="product-input"
       />
@@ -121,6 +124,6 @@
       </div>
     </div>
   </div>
-</div> -->
+</div>
 
 <hr />

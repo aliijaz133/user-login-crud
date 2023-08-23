@@ -1,12 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { DataServiceService } from './data-service.service';
 import { DataType } from './data-type';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  FormControl,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 Router;
 
@@ -17,7 +12,7 @@ Router;
 })
 export class NewComponentComponent implements OnInit {
   @ViewChild('formElement') formElement: ElementRef | undefined;
-  @ViewChild('addItem') addItem: ElementRef | undefined;
+  @ViewChild('addItem') addItem!: ElementRef;
 
   products: DataType[] = [];
 
@@ -37,7 +32,10 @@ export class NewComponentComponent implements OnInit {
   productData: FormGroup;
 
   productDataDetail = {
-    editing: true,
+    id: 0,
+    name: '',
+    price: 0,
+    updating: true,
   };
 
   ngOnInit(): void {
@@ -48,11 +46,19 @@ export class NewComponentComponent implements OnInit {
     this.router.navigate(['/product-list']);
   }
 
-  formVisible() {
-    if (this.addItem) {
-      this.addItem.nativeElement.style.visibility = 'visible';
-    }
+  formVisible(ev?: any) {
+    this.addItem.nativeElement.style.visibility = 'visible';
+
     this.productData.reset();
+    console.log(ev);
+    if (ev) {
+      const data = {
+        productId: ev.id,
+        productName: ev.name,
+        productPrice: ev.price,
+      };
+      this.productData.patchValue(data);
+    }
   }
 
   minimizeForm() {
@@ -66,13 +72,27 @@ export class NewComponentComponent implements OnInit {
     this.minimizeForm();
   }
 
+  updateProductData(index: number) {
+    const product = this.products[index];
+    this.productDataDetail = {
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      updating: true,
+    };
+
+    if (this.formElement) {
+      this.formElement.nativeElement.style.visibility = 'visible';
+    }
+  }
+
   setProductData() {
     if (this.productData.valid) {
       const newProduct: DataType = {
         id: this.productData.controls['productId'].value,
         name: this.productData.controls['productName'].value,
         price: this.productData.controls['productPrice'].value,
-        updating: this.productDataDetail.editing,
+        updating: this.productDataDetail.updating,
       };
 
       this.products.push(newProduct);
@@ -81,37 +101,33 @@ export class NewComponentComponent implements OnInit {
     }
   }
 
-  // updateProductData(index: number) {
-  //   this.productData.controls['productId'].value;
-  //   this.productData.controls['productName']. = this.products[index].name;
-  //   this.productDataDetail.price = this.products[index].price;
-  //   this.productDataDetail.editing = true;
-
-  //   if (this.formElement) {
-  //     this.formElement.nativeElement.style.visibility = 'visible';
-  //   }
-  // }
-
   confirmUpdate(index: number) {
     const updatedProduct: DataType = {
-      id: index,
-      name: this.productData.controls['productName'].value,
-      price: this.productData.controls['productPrice'].value,
-      updating: this.productDataDetail.editing,
+      id: this.productDataDetail.id,
+      name: this.productDataDetail.name,
+      price: this.productDataDetail.price,
+      updating: false,
     };
 
     this.products[index] = updatedProduct;
     console.log('Product updated:', updatedProduct);
 
-    this.productDataDetail = {
-      editing: false,
-    };
+    this.cancelUpdate();
   }
 
   cancelUpdate() {
     this.productDataDetail = {
-      editing: false,
+      id: 0,
+      name: '',
+      price: 0,
+      updating: false,
     };
+
+    if (this.formElement) {
+      this.formElement.nativeElement.style.visibility = 'hidden';
+    }
+
+    this.productData.reset();
   }
 
   deleteProductData(index: number) {
