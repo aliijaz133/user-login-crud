@@ -1,9 +1,6 @@
 <div class="btn-container">
-  <button (click)="userLogout()" class="logout-btn">
-    Logout&nbsp;<i class="fa fa-sign-out"></i>
-  </button>
-  <button (click)="newComp()" style="cursor: pointer">
-    New Component&nbsp;<i class="fa fa-chevron-circle-right"></i>
+  <button class="logout-btn" (click)="listComp()">
+    <i class="fa fa-arrow-left"></i>Previous Page
   </button>
   <button class="logout-btn add-item" (click)="formVisible()">Add Item</button>
 </div>
@@ -12,6 +9,7 @@
   <table>
     <thead>
       <tr>
+        <th>Id</th>
         <th>Name</th>
         <th>Price</th>
         <th colspan="2">Action</th>
@@ -19,13 +17,13 @@
     </thead>
     <tbody>
       <tr *ngFor="let product of products; let i = index" class="tr-function">
+        <td>{{ product.id }}</td>
         <td>{{ product.name }}</td>
-        <td>{{ product.rate }}</td>
+        <td>{{ product.price }}</td>
         <td>
           <i
             class="fa fa-edit"
             style="color: #0000ff; font-size: 1.3rem; cursor: pointer"
-            (click)="updateProductData(i)"
           ></i>
         </td>
         <td>
@@ -60,7 +58,6 @@
         type="number"
         name="productId"
         class="product-input"
-        [(ngModel)]="productDataDetail.id"
         formControlName="productId"
         placeholder="Enter Id"
         autocomplete="off"
@@ -72,7 +69,6 @@
         type="text"
         name="productName"
         class="product-input"
-        [(ngModel)]="productDataDetail.name"
         formControlName="productName"
         placeholder="Product Name"
         autocomplete="off"
@@ -82,7 +78,6 @@
         type="number"
         name="productPrice"
         class="product-input"
-        [(ngModel)]="productDataDetail.rate"
         formControlName="productPrice"
         placeholder="Price"
         autocomplete="off"
@@ -99,7 +94,7 @@
     </form>
   </div>
 </div>
-<div class="update-form" #formElement>
+<!-- <div class="update-form" #formElement>
   <div *ngFor="let product of products; let i = index">
     <div
       *ngIf="productDataDetail.id === i && productDataDetail.editing"
@@ -126,4 +121,6 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
+
+<hr />

@@ -7,14 +7,14 @@
           type="email"
           id="userEmail"
           formControlName="userEmail"
-          [(ngModel)]="userData.userEmail"
           placeholder="Enter Email"
           autocomplete="off"
         />
         <div
           *ngIf="
             loginForm.get('userEmail')?.invalid &&
-            loginForm.get('userEmail')?.touched
+            (loginForm.get('userEmail')?.touched ||
+              loginForm.get('userEmail')?.dirty)
           "
         >
           <div *ngIf="loginForm.get('userEmail')?.hasError('required')">
@@ -32,7 +32,6 @@
           type="password"
           id="userPwd"
           formControlName="userPwd"
-          [(ngModel)]="userData.userPassword"
           placeholder="Enter Password"
           autocomplete="off"
         />

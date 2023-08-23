@@ -10,8 +10,9 @@ import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormVisibilityDirective } from './list-comp/form-visibility.directive';
+// import { FormVisibilityDirective } from './list-comp/form-visibility.directive';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { NewComponentComponent } from './new-component/new-component.component';
 
 registerLocaleData(en);
 
@@ -20,8 +21,9 @@ registerLocaleData(en);
     AppComponent,
     ListCompComponent,
     UserLoginComponent,
-    FormVisibilityDirective,
+    // FormVisibilityDirective,
     PageNotFoundComponent,
+    NewComponentComponent,
   ],
   imports: [
     BrowserModule,

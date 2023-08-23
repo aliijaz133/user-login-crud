@@ -35,6 +35,10 @@ export class ListCompComponent implements OnInit {
     });
   }
 
+  newComp() {
+    this.router.navigate(['/new-component']);
+  }
+
   userLogout() {
     this.router.navigate(['/user-login']);
   }

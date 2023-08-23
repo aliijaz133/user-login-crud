@@ -8,22 +8,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-login.component.scss'],
 })
 export class UserLoginComponent {
-  title = 'user-login';
-  userData = {
-    userEmail: '',
-    userPassword: '',
-  };
+  title: string;
 
   userAuth = {
     email: 'aliijaz@gmail.com',
     pwd: 'abcd1234',
   };
 
-  loginForm!: FormGroup;
+  loginForm: FormGroup;
 
-  constructor(private router: Router) {}
-
-  ngOnInit() {
+  constructor(private router: Router) {
+    this.title = 'user-login';
     this.loginForm = new FormGroup({
       userEmail: new FormControl('', [Validators.required, Validators.email]),
       userPwd: new FormControl('', [
@@ -35,14 +30,15 @@ export class UserLoginComponent {
 
   submitForm() {
     if (
-      this.userData.userEmail === this.userAuth.email &&
-      this.userData.userPassword === this.userAuth.pwd
+      this.userAuth.email === this.loginForm.controls['userEmail'].value &&
+      this.userAuth.pwd === this.loginForm.controls['userPwd'].value
     ) {
-      console.log('Submitted Successfully...');
       this.router.navigate(['/product-list']);
-    } else if (this.userData.userEmail !== this.userAuth.email) {
+    } else if (
+      this.userAuth.email !== this.loginForm.controls['userEmail'].value
+    ) {
       alert('Invalid Email');
-    } else if (this.userData.userPassword !== this.userAuth.pwd) {
+    } else if (this.userAuth.pwd !== this.loginForm.controls['userPwd'].value) {
       alert('Invalid Password');
     }
   }

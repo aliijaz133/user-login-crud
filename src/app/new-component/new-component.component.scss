@@ -1,0 +1,135 @@
+.btn-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: row-reverse;
+    gap: 10%;
+    margin-bottom: 50px;
+    margin-top: 20px;
+  }
+  
+  .logout-btn {
+    font-weight: bold;
+    padding: 10px 20px;
+    background-color: #ff0000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .add-item {
+    background-color: #00a2ff;
+  }
+  
+  .list-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  table {
+    width: 500px;
+    background-color: #f3ece2;
+    border-collapse: collapse;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  
+  th {
+    border-bottom: 1px solid #000;
+  }
+  
+  td {
+    padding: 10px 0px;
+    border-bottom: 1px solid #d3d3d3;
+    text-align: center;
+  }
+  
+  .red-cross-btn {
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+  }
+  
+  .form-visibilty__control {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(0 0 0 / 85%);
+    position: absolute;
+    top: 0%;
+    bottom: 0%;
+    right: 0%;
+    left: 0%;
+    visibility: hidden;
+  }
+  
+  .form-setting {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 20%;
+    bottom: 40%;
+    right: 50%;
+    left: 50%;
+  }
+  
+  .form-container {
+    background-color: #302c2c;
+    padding: 20px 30px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  
+  .product-input {
+    padding: 10px 0px;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 10px;
+  }
+  
+  .product-input:focus {
+    outline: none;
+    box-shadow: 1px 1px 2px rgb(62, 181, 211);
+  }
+  
+  .add-item__btn {
+    padding: 10px 10px;
+    border: none;
+  }
+  
+  .add-item__btn:hover {
+    background-color: #00a2ff;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .update-form {
+    display: flex;
+    justify-content: center;
+    background-color: #000000e3;
+    position: absolute;
+    top: 50%;
+    bottom: 50%;
+    right: 50%;
+    left: 50%;
+    visibility: hidden;
+  }
+  
+  .update-form__setting {
+    margin-top: -100px;
+    background-color: #302c2c;
+    padding: 20px 20px;
+  }
+  
+  .update-cancel__btn {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    margin-top: 20px;
+  }
+  
+  @media (max-width: 420px) {
+    table {
+      max-width: fit-content;
+    }
+  }
+  
