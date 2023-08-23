@@ -7,6 +7,10 @@ import { Product } from './product';
 export class ProductServiceService {
   products: Product[];
   constructor() {
+    // const arry1 = ['a', 'b', 'c', 'd'];
+    // arry1.splice(3, 0, 'z');
+    // console.log(arry1);
+
     this.products = [
       {
         id: 1,
