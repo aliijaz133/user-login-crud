@@ -75,6 +75,7 @@
         autocomplete="off"
         required
       />
+
       <input
         type="number"
         name="productPrice"
@@ -85,12 +86,14 @@
         min="1000"
         required
       />
+
       <div *ngIf="productData.get('productPrice')?.hasError('min')">
         <span style="color: #fff"
           >Price should be greater than
           <code style="color: #ff0000">1000</code></span
         >
       </div>
+
       <button class="add-item__btn" type="submit">
         {{ productDataDetail.updating ? "Updating Item" : "Add Item" }}
       </button>
